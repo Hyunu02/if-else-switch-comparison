@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include <time.h>
 
 #define ITERATIONS 30
@@ -365,36 +367,120 @@ int switchWith30Cases(int input) {
     }
 }
 
-void loopIfCaseTenMillionTimes(int cases) {
+void loopIfCaseTenMillionTimes(int cases, char type) {
     int (*functionPointer)(int);
     int input;
     clock_t start, end;
+    bool isAverageCase = false;
     double elapsed = 0.0;
     switch(cases) {
         case 2:
             functionPointer = ifWith2Cases;
-            input = 1;
+            switch(type) {
+                case 'w':
+                    input = 1;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 2;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         case 3:
             functionPointer = ifWith3Cases;
-            input = 2;
+            switch(type) {
+                case 'w':
+                    input = 2;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 3;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         case 5:
             functionPointer = ifWith5Cases;
-            input = 4;
+            switch(type) {
+                case 'w':
+                    input = 4;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 5;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         case 8:
             functionPointer = ifWith8Cases;
-            input = 7;
+            switch(type) {
+                case 'w':
+                    input = 7;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 8;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            } 
             break;
+
         case 10:
             functionPointer = ifWith10Cases;
-            input = 9;
+            switch(type) {
+                case 'w':
+                    input = 9;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 10;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+            
         case 30:
             functionPointer = ifWith30Cases;
-            input = 29;
-            break;
+            switch(type) {
+                case 'w':
+                    input = 29;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 30;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            } 
+
         default:
             break;
     }
@@ -402,44 +488,134 @@ void loopIfCaseTenMillionTimes(int cases) {
     for(int i = 0; i < ITERATIONS; i++) {
         start = clock();
         for(int j = 0; j < 10000000; j++) {
-            functionPointer(input);
+            if(isAverageCase) {
+                int randomNum = rand() % input;
+                functionPointer(randomNum);
+            } else {
+                functionPointer(input);
+            }
         }
         end = clock();
         elapsed += (double)(end - start)/CLOCKS_PER_SEC;
     }
-    printf("Average spent time: %.3f seconds, for if/else case with %d cases, average of %d iterations.\n", elapsed/ITERATIONS, cases, ITERATIONS);
+    printf("Average spent time: %.3f seconds, for if/else case with %d cases, average of %d iterations in %c case.\n", elapsed/ITERATIONS, cases, ITERATIONS, type);
 }
 
-void loopSwitchCaseTenMillionTimes(int cases) {
+void loopSwitchCaseTenMillionTimes(int cases, char type) {
     int (*functionPointer)(int);
     int input;
     clock_t start, end;
+    bool isAverageCase = false;
     double elapsed = 0.0;
     switch(cases) {
         case 2:
             functionPointer = switchWith2Cases;
-            input = 1;
+            switch(type) {
+                case 'w':
+                    input = 1;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 2;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         case 3:
             functionPointer = switchWith3Cases;
-            input = 2;
+            switch(type) {
+                case 'w':
+                    input = 2;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 3;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            } 
             break;
+
         case 5:
             functionPointer = switchWith5Cases;
-            input = 4;
+            switch(type) {
+                case 'w':
+                    input = 4;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 5;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }   
             break;
+
         case 8:
             functionPointer = switchWith8Cases;
-            input = 7;
+            switch(type) {
+                case 'w':
+                    input = 7;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 8;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }  
             break;
+
         case 10:
             functionPointer = switchWith10Cases;
-            input = 9;
+            switch(type) {
+                case 'w':
+                    input = 9;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 10;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         case 30:
             functionPointer = switchWith30Cases;
-            input = 29;
+            switch(type) {
+                case 'w':
+                    input = 29;
+                    break;
+                case 'b':
+                    input = 0;
+                    break;
+                case 'a':
+                    input = 30;
+                    isAverageCase = true;
+                    break;
+                default:
+                    break;
+            }
             break;
+
         default:
             break;
     }
@@ -447,44 +623,87 @@ void loopSwitchCaseTenMillionTimes(int cases) {
     for(int i = 0; i < ITERATIONS; i++) {
         start = clock();
         for(int j = 0; j < 10000000; j++) {
-            functionPointer(input);
+            if(isAverageCase) {
+                int randomNum = rand() % input;
+                functionPointer(randomNum);
+            } else {
+                functionPointer(input);
+            }
         }
         end = clock();
         elapsed += (double)(end - start)/CLOCKS_PER_SEC;
     }
-    printf("Average spent time: %.3f seconds, for switch case with %d cases, average of %d iterations.\n", elapsed/ITERATIONS, cases, ITERATIONS);    
+    printf("Average spent time: %.3f seconds, for switch case with %d cases, average of %d iterations in %c case.\n", elapsed/ITERATIONS, cases, ITERATIONS, type);    
 }
 
 int main(void) {
     // AVAILABLE CASES: 2, 3, 5, 8, 10, 30
 
-    loopIfCaseTenMillionTimes(2);
-    loopSwitchCaseTenMillionTimes(2);
+    srand(time(NULL));
+
+    loopIfCaseTenMillionTimes(2, 'w');
+    loopSwitchCaseTenMillionTimes(2, 'w');
+    
+    loopIfCaseTenMillionTimes(2, 'b');
+    loopSwitchCaseTenMillionTimes(2, 'b');
+
+    loopIfCaseTenMillionTimes(2, 'a');
+    loopSwitchCaseTenMillionTimes(2, 'a');
 
     printf("\n");
 
-    loopIfCaseTenMillionTimes(3);
-    loopSwitchCaseTenMillionTimes(3);
+    loopIfCaseTenMillionTimes(3, 'w');
+    loopSwitchCaseTenMillionTimes(3, 'w');
+
+    loopIfCaseTenMillionTimes(3, 'b');
+    loopSwitchCaseTenMillionTimes(3, 'b');
+
+    loopIfCaseTenMillionTimes(3, 'a');
+    loopSwitchCaseTenMillionTimes(3, 'a');
 
     printf("\n");
 
-    loopIfCaseTenMillionTimes(5);
-    loopSwitchCaseTenMillionTimes(5);
+    loopIfCaseTenMillionTimes(5, 'w');
+    loopSwitchCaseTenMillionTimes(5, 'w');
+
+    loopIfCaseTenMillionTimes(5, 'b');
+    loopSwitchCaseTenMillionTimes(5, 'b');
+
+    loopIfCaseTenMillionTimes(5, 'a');
+    loopSwitchCaseTenMillionTimes(5, 'a');
 
     printf("\n");
 
-    loopIfCaseTenMillionTimes(8);
-    loopSwitchCaseTenMillionTimes(8);
+    loopIfCaseTenMillionTimes(8, 'w');
+    loopSwitchCaseTenMillionTimes(8, 'w');
+
+    loopIfCaseTenMillionTimes(8, 'b');
+    loopSwitchCaseTenMillionTimes(8, 'b');
+
+    loopIfCaseTenMillionTimes(8, 'a');
+    loopSwitchCaseTenMillionTimes(8, 'a');
 
     printf("\n");
 
-    loopIfCaseTenMillionTimes(10);
-    loopSwitchCaseTenMillionTimes(10);
+    loopIfCaseTenMillionTimes(10, 'w');
+    loopSwitchCaseTenMillionTimes(10, 'w');
+
+    loopIfCaseTenMillionTimes(10, 'b');
+    loopSwitchCaseTenMillionTimes(10, 'b');
+
+    loopIfCaseTenMillionTimes(10, 'a');
+    loopSwitchCaseTenMillionTimes(10, 'a');
 
     printf("\n");
 
-    loopIfCaseTenMillionTimes(30);
-    loopSwitchCaseTenMillionTimes(30);
+    loopIfCaseTenMillionTimes(30, 'w');
+    loopSwitchCaseTenMillionTimes(30, 'w');
+
+    loopIfCaseTenMillionTimes(30, 'b');
+    loopSwitchCaseTenMillionTimes(30, 'b');
+
+    loopIfCaseTenMillionTimes(30, 'a');
+    loopSwitchCaseTenMillionTimes(30, 'a');
 
     return 0;
 }
